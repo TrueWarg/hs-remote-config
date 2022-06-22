@@ -44,6 +44,8 @@ executable hs-remote-config-exe
   build-depends:
       base >=4.7 && <5
     , yesod ==1.6.2
+    , text ==1.2.5.0
+    , time ==1.9.3
     , hs-remote-config
   default-language: Haskell2010
 
