@@ -46,6 +46,9 @@ executable hs-remote-config-exe
     , yesod ==1.6.2
     , text ==1.2.5.0
     , time ==1.9.3
+    , aeson ==2.0.3.0
+    , containers ==0.6.4.1
+    , scientific ==0.3.7.0
     , hs-remote-config
   default-language: Haskell2010
 

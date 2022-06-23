@@ -1,25 +1,44 @@
-{-# LANGUAGE OverloadedStrings, QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes       #-}
+{-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 module Main where
 
-import Yesod
+import           Yesod
 
-data App = App -- Put your config, database connection pool, etc. in here.
+data App =
+  App
 
--- Derive routes and instances for App.
-mkYesod "App" [parseRoutes|
-/ HomeR GET
-/page1 Page1R GET
-/page2 Page2R GET
+mkYesod
+  "App"
+  [parseRoutes|
+/config/register ConfigRegister POST
+/config/ Config GET
+/config/item Item GET
+
+/admin/config AdminConfig GET POST PATCH
 |]
 
-instance Yesod App -- Methods in here can be overridden as needed.
+instance Yesod App
 
--- The handler for the GET request at /, corresponds to HomeR.
-getHomeR :: Handler Html
-getHomeR = defaultLayout [whamlet|Lol Kek Chebureck|]
-getPage1R = defaultLayout [whamlet|<a href=@{Page2R}>Go to page 2|]
-getPage2R = defaultLayout [whamlet|<a href=@{HomeR}>Go home|]
+postConfigRegister :: Handler Html
+postConfigRegister = defaultLayout [whamlet|client/register|]
+
+getConfig :: Handler Html
+getConfig = defaultLayout [whamlet|client/config|]
+
+getItem :: Handler Html
+getItem = defaultLayout [whamlet|client/item|]
+
+getAdminConfig :: Handler Html
+getAdminConfig = defaultLayout [whamlet|client/item|]
+
+postAdminConfig :: Handler Html
+postAdminConfig = defaultLayout [whamlet|client/item|]
+
+patchAdminConfig :: Handler Html
+patchAdminConfig = defaultLayout [whamlet|client/item|]
 
 main :: IO ()
 main = warp 3000 App
