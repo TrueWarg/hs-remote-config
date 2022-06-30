@@ -37,7 +37,9 @@ library
 executable hs-remote-config-exe
   main-is: Main.hs
   other-modules:
-      Paths_hs_remote_config
+      Admin.Api
+      Config.Api
+      Config.Storage
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
@@ -49,6 +51,11 @@ executable hs-remote-config-exe
     , aeson ==2.0.3.0
     , containers ==0.6.4.1
     , scientific ==0.3.7.0
+    , persistent ==2.13.3.5
+    , persistent-sqlite ==2.13.1.0
+    , persistent-template ==2.12.0.0
+    , resourcet ==1.2.5
+    , monad-logger ==0.3.36
     , hs-remote-config
   default-language: Haskell2010
 
